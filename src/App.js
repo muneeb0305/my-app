@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import Card from "./component/Card";
+import Card from "./component/card";
 import "react-multi-carousel/lib/styles.css";
 import M3M_Altitude from "./images/M3M Altitude.webp";
 import M3M_Mansion from "./images/M3M Mansion.webp";
@@ -27,7 +27,24 @@ const responsive = {
     items: 3,
   },
 };
-
+const data = [
+  {
+    image: M3M_Altitude,
+    location: "Sector 65, Gurgaon",
+    title: "M3M Altitude",
+  },
+  { image: M3M_Mansion, location: "Sector 113, Gurgaon", title: "M3M Mansion" },
+  {
+    image: Smartworld,
+    location: "Sector 65, Gurgaon",
+    title: "DLF The Arbour",
+  },
+  {
+    image: Whiteland,
+    location: "Sector 103, Gurgaon",
+    title: "Whiteland Urban Resort",
+  },
+];
 const App = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
 
@@ -71,50 +88,20 @@ const App = () => {
           beforeChange={handleBeforeChange}
           partialVisible={true}
         >
-          <div
-            className={`carousel-card ${
-              currentSlide % 4 === 0 ? "center" : ""
-            }`}
-          >
-            <Card
-              image={M3M_Altitude}
-              location="Sector 65, Gurgaon"
-              title="M3M Altitude"
-            />
-          </div>
-          <div
-            className={`carousel-card ${
-              currentSlide % 4 === 1 ? "center" : ""
-            }`}
-          >
-            <Card
-              image={M3M_Mansion}
-              location="Sector 113, Gurgaon"
-              title="M3M Mansion"
-            />
-          </div>
-          <div
-            className={`carousel-card ${
-              currentSlide % 4 === 2 ? "center" : ""
-            }`}
-          >
-            <Card
-              image={Smartworld}
-              location="Sector 65, Gurgaon"
-              title="DLF The Arbour"
-            />
-          </div>
-          <div
-            className={`carousel-card ${
-              currentSlide % 4 === 3 ? "center" : ""
-            }`}
-          >
-            <Card
-              image={Whiteland}
-              location="Sector 103, Gurgaon"
-              title="Whiteland Urban Resort"
-            />
-          </div>
+          {data.map((item, index) => (
+            <div
+              key={index}
+              className={`carousel-card ${
+                currentSlide % 4 === index ? "center" : ""
+              }`}
+            >
+              <Card
+                image={item.image}
+                location={item.location}
+                title={item.title}
+              />
+            </div>
+          ))}
         </Carousel>
       </div>
     </div>
